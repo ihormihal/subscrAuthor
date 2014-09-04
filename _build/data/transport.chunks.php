@@ -3,8 +3,16 @@
 $chunks = array();
 
 $tmp = array(
-	'tpl.subscrAuthor.user' => array(
-		'file' => 'user',
+	'subscAuthor' => array(
+		'file' => 'subscAuthor',
+		'description' => '',
+	),
+	'subscr_confirm' => array(
+		'file' => 'subscr_confirm',
+		'description' => '',
+	),
+	'subscr_on_author_notify' => array(
+		'file' => 'subscr_on_author_notify',
 		'description' => '',
 	),
 );

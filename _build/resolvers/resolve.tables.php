@@ -12,6 +12,7 @@ if ($object->xpdo) {
 			$manager = $modx->getManager();
 			$objects = array(
 				'subscrAuthorUser',
+				'subscrAuthorDoc',
 			);
 			foreach ($objects as $tmp) {
 				$manager->createObjectContainer($tmp);

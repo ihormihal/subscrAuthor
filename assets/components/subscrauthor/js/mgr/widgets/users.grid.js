@@ -7,15 +7,16 @@ subscrAuthor.grid.Items = function(config) {
 		,baseParams: {
 			action: 'mgr/user/getlist'
 		}
-		,fields: ['id','name','description']
+		,fields: ['id','user_id','user_email','author_id']
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
         ,sm: this.sm
 		,columns: [
-			{header: _('id'),dataIndex: 'id',width: 70}
-			,{header: _('name'),dataIndex: 'name',width: 200}
-			,{header: _('description'),dataIndex: 'description',width: 250}
+			{header: _('id'),dataIndex: 'id',width: 50}
+			,{header: _('user_id'),dataIndex: 'user_id',width: 50}
+			,{header: _('user_email'),dataIndex: 'user_email',width: 200}
+			,{header: _('author_id'),dataIndex: 'author_id',width: 50}
 		]
 		,tbar: [{
 			text: _('subscrauthor_user_create')
@@ -162,13 +163,14 @@ subscrAuthor.window.CreateItem = function(config) {
 	Ext.applyIf(config,{
 		title: _('subscrauthor_user_create')
 		,id: this.ident
-		,height: 200
+		,height: 100
 		,width: 475
 		,url: subscrAuthor.config.connector_url
 		,action: 'mgr/user/create'
 		,fields: [
-			{xtype: 'textfield',fieldLabel: _('name'),name: 'name',id: 'subscrauthor-'+this.ident+'-name',anchor: '99%'}
-			,{xtype: 'textarea',fieldLabel: _('description'),name: 'description',id: 'subscrauthor-'+this.ident+'-description',height: 150,anchor: '99%'}
+			{xtype: 'textfield',fieldLabel: _('user_id'),name: 'user_id',id: 'subscrauthor-'+this.ident+'-user_id',anchor: '99%'}
+			,{xtype: 'textfield',fieldLabel: _('user_email'),name: 'user_email',id: 'subscrauthor-'+this.ident+'-user_email',anchor: '99%'}
+			,{xtype: 'textfield',fieldLabel: _('author_id'),name: 'author_id',id: 'subscrauthor-'+this.ident+'-author_id',anchor: '99%'}
 		]
 		,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
 	});
@@ -184,14 +186,15 @@ subscrAuthor.window.UpdateItem = function(config) {
 	Ext.applyIf(config,{
 		title: _('subscrauthor_user_update')
 		,id: this.ident
-		,height: 200
+		,height: 100
 		,width: 475
 		,url: subscrAuthor.config.connector_url
 		,action: 'mgr/user/update'
 		,fields: [
 			{xtype: 'hidden',name: 'id',id: 'subscrauthor-'+this.ident+'-id'}
-			,{xtype: 'textfield',fieldLabel: _('name'),name: 'name',id: 'subscrauthor-'+this.ident+'-name',anchor: '99%'}
-			,{xtype: 'textarea',fieldLabel: _('description'),name: 'description',id: 'subscrauthor-'+this.ident+'-description',height: 150,anchor: '99%'}
+			,{xtype: 'textfield',fieldLabel: _('user_id'),name: 'user_id',id: 'subscrauthor-'+this.ident+'-user_id',anchor: '99%'}
+			,{xtype: 'textfield',fieldLabel: _('user_email'),name: 'user_email',id: 'subscrauthor-'+this.ident+'-user_email',anchor: '99%'}
+			,{xtype: 'textfield',fieldLabel: _('author_id'),name: 'author_id',id: 'subscrauthor-'+this.ident+'-author_id',anchor: '99%'}
 		]
 		,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
 	});

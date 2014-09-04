@@ -5,10 +5,10 @@
 		<field key="user_id" dbtype="int" precision="10" phptype="integer" null="true" />
 		<field key="user_email" dbtype="varchar" precision="255" phptype="string" null="false" />
 		<field key="author_id" dbtype="int" precision="10" phptype="integer" null="true" />
+	</object>
 
-		<index alias="user_id" name="user_id" primary="false" unique="false" type="BTREE">
-			<column key="user_id" length="" collation="A" null="false" />
-		</index>
+	<object class="subscrAuthorDoc" table="subscrauthor_docs" extends="xPDOSimpleObject">
+		<field key="doc_id" dbtype="int" precision="10" phptype="integer" null="false" default="" />
 	</object>
 
 </model>

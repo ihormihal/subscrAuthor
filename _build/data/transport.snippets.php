@@ -4,7 +4,23 @@ $snippets = array();
 
 $tmp = array(
 	'subscrAuthor' => array(
-		'file' => 'subscrauthor',
+		'file' => 'subscrAuthor',
+		'description' => '',
+	),
+	'getSubscribers' => array(
+		'file' => 'getSubscribers',
+		'description' => '',
+	),
+	'subscrNotify' => array(
+		'file' => 'subscrNotify',
+		'description' => '',
+	),
+	'subscrConfirm' => array(
+		'file' => 'subscrConfirm',
+		'description' => '',
+	),
+	'unsubscrAuthor' => array(
+		'file' => 'unsubscrAuthor',
 		'description' => '',
 	),
 );

@@ -34,23 +34,4 @@ $xpdo_meta_map['subscrAuthorUser']= array (
       'null' => true,
     ),
   ),
-  'indexes' => 
-  array (
-    'user_id' => 
-    array (
-      'alias' => 'user_id',
-      'primary' => false,
-      'unique' => false,
-      'type' => 'BTREE',
-      'columns' => 
-      array (
-        'user_id' => 
-        array (
-          'length' => '',
-          'collation' => 'A',
-          'null' => false,
-        ),
-      ),
-    ),
-  ),
 );

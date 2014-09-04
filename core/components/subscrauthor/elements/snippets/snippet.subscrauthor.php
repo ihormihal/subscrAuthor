@@ -1,38 +1,38 @@
 <?php
+$subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption('subscrauthor_core_path',null,$modx->getOption('core_path').'components/subscrauthor/').'model/subscrauthor/');
+$confirmId = $templateId = $this->modx->getOption('confirmId', $config);
 
-$subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption('subscrauthor_core_path',null,$modx->getOption('core_path').'components/subscrauthor/').'model/subscrauthor/',$scriptProperties);
-if (!($subscrAuthor instanceof subscrAuthor)) return '';
+/* base config */
+$tpl = $modx->getOption('tpl',$scriptProperties,'subscr_confirm');
 
-/**
- * Do your snippet code here. This demo grabs 5 users from our custom table.
- */
-$tpl = $modx->getOption('tpl',$scriptProperties,'User');
-$sortBy = $modx->getOption('sortBy',$scriptProperties,'name');
-$sortDir = $modx->getOption('sortDir',$scriptProperties,'ASC');
-$limit = $modx->getOption('limit',$scriptProperties,5);
-$outputSeparator = $modx->getOption('outputSeparator',$scriptProperties,"\n");
+$mail_from = $this->modx->getOption('mail_from', $config);
+$mail_from_name = $this->modx->getOption('mail_from_name', $config);
+$mail_subject_conform = $this->modx->getOption('mail_subject_confirm', $config);
 
-/* build query */
-$c = $modx->newQuery('subscrAuthorUser');
-$c->sortby($sortBy,$sortDir);
-$c->limit($limit);
-$users = $modx->getCollection('subscrAuthorUser',$c);
+if(isset($_GET['email'])) $user_email = $_GET['email'];
+if(isset($_GET['author'])) $author = $_GET['author'];
 
-/* iterate through users */
-$list = array();
-/* @var subscrAuthorUser $user */
-foreach ($users as $user) {
-	$userArray = $user->toArray();
-	$list[] = $modx->getChunk($tpl,$userArray);
+$salt = "subscribe_my_email_please";
+$subscr_doc_url = $modx->getOption('site_url').$modx->makeUrl($confirmId);
+$subscr_url = $subscr_doc_url.'?email='.$user_email.'&author='.$author.'&hash='.md5($user_email.$salt);
+
+echo $subscr_url;
+
+$modx->setPlaceholder('author',$author);
+$modx->setPlaceholder('subscr_url',$subscr_url);
+
+$message = $modx->getChunk($tpl);
+
+$modx->getService('mail', 'mail.modPHPMailer');
+$modx->mail->set(modMail::MAIL_BODY,$message);
+$modx->mail->set(modMail::MAIL_FROM,$mail_from);
+$modx->mail->set(modMail::MAIL_FROM_NAME,$mail_from_name);
+$modx->mail->set(modMail::MAIL_SUBJECT,$mail_subject);
+$modx->mail->address('to',$user_email);
+
+
+$modx->mail->setHTML(true);
+if (!$modx->mail->send()) {
+    $modx->log(modX::LOG_LEVEL_ERROR,'An error occurred while trying to send the email: '.$modx->mail->mailer->ErrorInfo);
 }
-
-/* output */
-$output = implode($outputSeparator,$list);
-$toPlaceholder = $modx->getOption('toPlaceholder',$scriptProperties,false);
-if (!empty($toPlaceholder)) {
-	/* if using a placeholder, output nothing and set output to specified placeholder */
-	$modx->setPlaceholder($toPlaceholder,$output);
-	return '';
-}
-/* by default just return output */
-return $output;
+$modx->mail->reset();

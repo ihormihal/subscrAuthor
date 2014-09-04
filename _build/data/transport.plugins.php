@@ -3,13 +3,34 @@
 $plugins = array();
 
 $tmp = array(
-	'subscrAuthor' => array(
+	'addTempDocs' => array(
+		'file' => 'addTempDocs',
+		'description' => '',
+		'events' => array(
+			'OnManagerPageInit' => array()
+		)
+	),
+	'checkDocInTemp' => array(
+		'file' => 'checkDocInTemp',
+		'description' => '',
+		'events' => array(
+			'OnManagerPageInit' => array()
+		)
+	),
+	'removeTempDocs' => array(
+		'file' => 'removeTempDocs',
+		'description' => '',
+		'events' => array(
+			'OnManagerPageInit' => array()
+		)
+	),
+	'subscrauthor' => array(
 		'file' => 'subscrauthor',
 		'description' => '',
 		'events' => array(
 			'OnManagerPageInit' => array()
 		)
-	)
+	),
 );
 
 foreach ($tmp as $k => $v) {
