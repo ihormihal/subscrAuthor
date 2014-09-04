@@ -1,11 +1,11 @@
 #!/bin/bash
 
-repl1=subscrAuthor
-repl2=subscrauthor
+repl1=User
+repl2=user
 
-find1=modExtra
-find2=modextra
-path=./modExtra
+find1=Item
+find2=item
+path=./subscrAuthor
 
 repl3=$repl1"ManagerController"
 

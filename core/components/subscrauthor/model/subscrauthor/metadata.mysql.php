@@ -3,6 +3,7 @@
 $xpdo_meta_map = array (
   'xPDOSimpleObject' => 
   array (
-    0 => 'subscrAuthorItem',
+    0 => 'subscrAuthorTemp',
+    1 => 'subscrAuthorUser'
   ),
 );

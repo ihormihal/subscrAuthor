@@ -3,7 +3,7 @@ subscrAuthor.panel.Home = function(config) {
 	Ext.apply(config,{
 		border: false
 		,baseCls: 'modx-formpanel'
-		,items: [{
+		,users: [{
 			html: '<h2>'+_('subscrauthor')+'</h2>'
 			,border: false
 			,cls: 'modx-page-header container'
@@ -12,17 +12,17 @@ subscrAuthor.panel.Home = function(config) {
 			,bodyStyle: 'padding: 10px'
 			,defaults: { border: false ,autoHeight: true }
 			,border: true
-			,activeItem: 0
+			,activeUser: 0
 			,hideMode: 'offsets'
-			,items: [{
-				title: _('subscrauthor_items')
-				,items: [{
+			,users: [{
+				title: _('subscrauthor_users')
+				,users: [{
 					html: _('subscrauthor_intro_msg')
 					,border: false
 					,bodyCssClass: 'panel-desc'
 					,bodyStyle: 'margin-bottom: 10px'
 				},{
-					xtype: 'subscrauthor-grid-items'
+					xtype: 'subscrauthor-grid-users'
 					,preventRender: true
 				}]
 			}]

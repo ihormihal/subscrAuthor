@@ -3,8 +3,8 @@
 $chunks = array();
 
 $tmp = array(
-	'tpl.subscrAuthor.item' => array(
-		'file' => 'item',
+	'tpl.subscrAuthor.user' => array(
+		'file' => 'user',
 		'description' => '',
 	),
 );

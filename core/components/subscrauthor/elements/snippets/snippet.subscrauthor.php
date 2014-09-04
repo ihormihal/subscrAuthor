@@ -4,26 +4,26 @@ $subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption
 if (!($subscrAuthor instanceof subscrAuthor)) return '';
 
 /**
- * Do your snippet code here. This demo grabs 5 items from our custom table.
+ * Do your snippet code here. This demo grabs 5 users from our custom table.
  */
-$tpl = $modx->getOption('tpl',$scriptProperties,'Item');
+$tpl = $modx->getOption('tpl',$scriptProperties,'User');
 $sortBy = $modx->getOption('sortBy',$scriptProperties,'name');
 $sortDir = $modx->getOption('sortDir',$scriptProperties,'ASC');
 $limit = $modx->getOption('limit',$scriptProperties,5);
 $outputSeparator = $modx->getOption('outputSeparator',$scriptProperties,"\n");
 
 /* build query */
-$c = $modx->newQuery('subscrAuthorItem');
+$c = $modx->newQuery('subscrAuthorUser');
 $c->sortby($sortBy,$sortDir);
 $c->limit($limit);
-$items = $modx->getCollection('subscrAuthorItem',$c);
+$users = $modx->getCollection('subscrAuthorUser',$c);
 
-/* iterate through items */
+/* iterate through users */
 $list = array();
-/* @var subscrAuthorItem $item */
-foreach ($items as $item) {
-	$itemArray = $item->toArray();
-	$list[] = $modx->getChunk($tpl,$itemArray);
+/* @var subscrAuthorUser $user */
+foreach ($users as $user) {
+	$userArray = $user->toArray();
+	$list[] = $modx->getChunk($tpl,$userArray);
 }
 
 /* output */
