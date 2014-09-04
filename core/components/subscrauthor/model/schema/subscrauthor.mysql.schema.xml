@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <model package="subscrauthor" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" phpdoc-package="subscrauthor" version="1.1">
 
-	<object class="subscrAuthorTemp" table="subscrauthor_temp" extends="xPDOSimpleObject">
-		<field key="docid" dbtype="int" precision="11" phptype="integer" null="false" />
-	</object>
-
-	<object class="subscrAuthorUser" table="subscrauthor_user" extends="xPDOSimpleObject">
+	<object class="subscrAuthorUser" table="subscrauthor_users" extends="xPDOSimpleObject">
 		<field key="user_id" dbtype="int" precision="10" phptype="integer" null="true" />
 		<field key="user_email" dbtype="varchar" precision="255" phptype="string" null="false" />
-		<field key="author" dbtype="int" precision="11" phptype="integer" null="true" />
+		<field key="author_id" dbtype="int" precision="10" phptype="integer" null="true" />
+
+		<index alias="user_id" name="user_id" primary="false" unique="false" type="BTREE">
+			<column key="user_id" length="" collation="A" null="false" />
+		</index>
 	</object>
 
 </model>

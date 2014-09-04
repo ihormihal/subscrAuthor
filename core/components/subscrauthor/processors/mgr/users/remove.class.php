@@ -1,8 +1,8 @@
 <?php
 /**
- * Remove an User
+ * Remove an Users
  */
-class subscrAuthorUserRemoveProcessor extends modProcessor {
+class subscrAuthorUsersRemoveProcessor extends modProcessor {
     public $checkRemovePermission = true;
 	public $objectType = 'subscrAuthorUser';
 	public $classKey = 'subscrAuthorUser';
@@ -10,7 +10,7 @@ class subscrAuthorUserRemoveProcessor extends modProcessor {
 
 	public function process() {
 
-        foreach (explode(',',$this->getProperty('user')) as $id) {
+        foreach (explode(',',$this->getProperty('users')) as $id) {
             $user = $this->modx->getObject($this->classKey, $id);
             $user->remove();
         }
@@ -21,4 +21,4 @@ class subscrAuthorUserRemoveProcessor extends modProcessor {
 
 }
 
-return 'subscrAuthorUserRemoveProcessor';
+return 'subscrAuthorUsersRemoveProcessor';

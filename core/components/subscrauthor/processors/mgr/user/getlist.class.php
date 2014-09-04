@@ -1,6 +1,6 @@
 <?php
 /**
- * Get a list of User
+ * Get a list of Users
  */
 class subscrAuthorUserGetListProcessor extends modObjectGetListProcessor {
 	public $objectType = 'subscrAuthorUser';

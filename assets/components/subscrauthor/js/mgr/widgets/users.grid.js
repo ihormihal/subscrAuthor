@@ -1,4 +1,4 @@
-subscrAuthor.grid.Users = function(config) {
+subscrAuthor.grid.Items = function(config) {
 	config = config || {};
     this.sm = new Ext.grid.CheckboxSelectionModel();
 	Ext.applyIf(config,{
@@ -7,32 +7,31 @@ subscrAuthor.grid.Users = function(config) {
 		,baseParams: {
 			action: 'mgr/user/getlist'
 		}
-		,fields: ['id','user_id','user_email','author']
+		,fields: ['id','name','description']
 		,autoHeight: true
 		,paging: true
 		,remoteSort: true
         ,sm: this.sm
 		,columns: [
 			{header: _('id'),dataIndex: 'id',width: 70}
-			,{header: _('user_id'),dataIndex: 'user_id',width: 200}
-			,{header: _('user_email'),dataIndex: 'user_email',width: 250}
-			,{header: _('author'),dataIndex: 'author',width: 70}
+			,{header: _('name'),dataIndex: 'name',width: 200}
+			,{header: _('description'),dataIndex: 'description',width: 250}
 		]
 		,tbar: [{
 			text: _('subscrauthor_user_create')
-			,handler: this.createUser
+			,handler: this.createItem
 			,scope: this
 		}]
 		,listeners: {
 			rowDblClick: function(grid, rowIndex, e) {
 				var row = grid.store.getAt(rowIndex);
-				this.updateUser(grid, e, row);
+				this.updateItem(grid, e, row);
 			}
 		}
 	});
-	subscrAuthor.grid.Users.superclass.constructor.call(this,config);
+	subscrAuthor.grid.Items.superclass.constructor.call(this,config);
 };
-Ext.extend(subscrAuthor.grid.Users,MODx.grid.Grid,{
+Ext.extend(subscrAuthor.grid.Items,MODx.grid.Grid,{
 	windows: {}
 
 	,getMenu: function() {
@@ -46,31 +45,31 @@ Ext.extend(subscrAuthor.grid.Users,MODx.grid.Grid,{
         } else {
     		m.push({
     			text: _('subscrauthor_user_update')
-    			,handler: this.updateUser
+    			,handler: this.updateItem
     		});
     		m.push('-');
     		m.push({
     			text: _('subscrauthor_user_remove')
-    			,handler: this.removeUser
+    			,handler: this.removeItem
     		});
         }
-		this.addContextMenuUser(m);
+		this.addContextMenuItem(m);
 	}
 	
-	,createUser: function(btn,e) {
-		if (!this.windows.createUser) {
-			this.windows.createUser = MODx.load({
+	,createItem: function(btn,e) {
+		if (!this.windows.createItem) {
+			this.windows.createItem = MODx.load({
 				xtype: 'subscrauthor-window-user-create'
 				,listeners: {
 					'success': {fn:function() { this.refresh(); },scope:this}
 				}
 			});
 		}
-		this.windows.createUser.fp.getForm().reset();
-		this.windows.createUser.show(e.target);
+		this.windows.createItem.fp.getForm().reset();
+		this.windows.createItem.show(e.target);
 	}
 
-	,updateUser: function(btn,e,row) {
+	,updateItem: function(btn,e,row) {
 		if (typeof(row) != 'undefined') {this.menu.record = row.data;}
 		var id = this.menu.record.id;
 
@@ -82,8 +81,8 @@ Ext.extend(subscrAuthor.grid.Users,MODx.grid.Grid,{
 			}
 			,listeners: {
 				success: {fn:function(r) {
-					if (!this.windows.updateUser) {
-						this.windows.updateUser = MODx.load({
+					if (!this.windows.updateItem) {
+						this.windows.updateItem = MODx.load({
 							xtype: 'subscrauthor-window-user-update'
 							,record: r
 							,listeners: {
@@ -91,15 +90,15 @@ Ext.extend(subscrAuthor.grid.Users,MODx.grid.Grid,{
 							}
 						});
 					}
-					this.windows.updateUser.fp.getForm().reset();
-					this.windows.updateUser.fp.getForm().setValues(r.object);
-					this.windows.updateUser.show(e.target);
+					this.windows.updateItem.fp.getForm().reset();
+					this.windows.updateItem.fp.getForm().setValues(r.object);
+					this.windows.updateItem.show(e.target);
 				},scope:this}
 			}
 		});
 	}
 
-	,removeUser: function(btn,e) {
+	,removeItem: function(btn,e) {
 		if (!this.menu.record) return false;
 		
 		MODx.msg.confirm({
@@ -138,7 +137,7 @@ Ext.extend(subscrAuthor.grid.Users,MODx.grid.Grid,{
 			,url: this.config.url
 			,params: {
                 action: 'mgr/users/remove'
-                ,users: cs
+                ,items: cs
             }
             ,listeners: {
                 'success': {fn:function(r) {
@@ -152,14 +151,14 @@ Ext.extend(subscrAuthor.grid.Users,MODx.grid.Grid,{
         return true;
     }
 });
-Ext.reg('subscrauthor-grid-users',subscrAuthor.grid.Users);
+Ext.reg('subscrauthor-grid-users',subscrAuthor.grid.Items);
 
 
 
 
-subscrAuthor.window.CreateUser = function(config) {
+subscrAuthor.window.CreateItem = function(config) {
 	config = config || {};
-	this.ident = config.ident || 'mecuser'+Ext.id();
+	this.ident = config.ident || 'mecitem'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('subscrauthor_user_create')
 		,id: this.ident
@@ -168,21 +167,20 @@ subscrAuthor.window.CreateUser = function(config) {
 		,url: subscrAuthor.config.connector_url
 		,action: 'mgr/user/create'
 		,fields: [
-			{xtype: 'textfield',fieldLabel: _('user_id'),user_id: 'user_id',id: 'subscrauthor-'+this.ident+'-user_id',anchor: '99%'}
-			,{xtype: 'textfield',fieldLabel: _('user_email'),user_id: 'user_email',id: 'subscrauthor-'+this.ident+'-user_email',height: 150,anchor: '99%'}
-			,{xtype: 'textfield',fieldLabel: _('author'),user_id: 'author',id: 'subscrauthor-'+this.ident+'-author',height: 150,anchor: '99%'}
+			{xtype: 'textfield',fieldLabel: _('name'),name: 'name',id: 'subscrauthor-'+this.ident+'-name',anchor: '99%'}
+			,{xtype: 'textarea',fieldLabel: _('description'),name: 'description',id: 'subscrauthor-'+this.ident+'-description',height: 150,anchor: '99%'}
 		]
 		,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
 	});
-	subscrAuthor.window.CreateUser.superclass.constructor.call(this,config);
+	subscrAuthor.window.CreateItem.superclass.constructor.call(this,config);
 };
-Ext.extend(subscrAuthor.window.CreateUser,MODx.Window);
-Ext.reg('subscrauthor-window-user-create',subscrAuthor.window.CreateUser);
+Ext.extend(subscrAuthor.window.CreateItem,MODx.Window);
+Ext.reg('subscrauthor-window-user-create',subscrAuthor.window.CreateItem);
 
 
-subscrAuthor.window.UpdateUser = function(config) {
+subscrAuthor.window.UpdateItem = function(config) {
 	config = config || {};
-	this.ident = config.ident || 'meuuser'+Ext.id();
+	this.ident = config.ident || 'meuitem'+Ext.id();
 	Ext.applyIf(config,{
 		title: _('subscrauthor_user_update')
 		,id: this.ident
@@ -191,14 +189,13 @@ subscrAuthor.window.UpdateUser = function(config) {
 		,url: subscrAuthor.config.connector_url
 		,action: 'mgr/user/update'
 		,fields: [
-			{xtype: 'hidden',user_id: 'id',id: 'subscrauthor-'+this.ident+'-id'}
-			,{xtype: 'textfield',fieldLabel: _('user_id'),user_id: 'user_id',id: 'subscrauthor-'+this.ident+'-user_id',anchor: '99%'}
-			,{xtype: 'textfield',fieldLabel: _('user_email'),user_id: 'user_email',id: 'subscrauthor-'+this.ident+'-user_email',height: 150,anchor: '99%'}
-			,{xtype: 'textfield',fieldLabel: _('author'),user_id: 'author',id: 'subscrauthor-'+this.ident+'-author',height: 150,anchor: '99%'}
+			{xtype: 'hidden',name: 'id',id: 'subscrauthor-'+this.ident+'-id'}
+			,{xtype: 'textfield',fieldLabel: _('name'),name: 'name',id: 'subscrauthor-'+this.ident+'-name',anchor: '99%'}
+			,{xtype: 'textarea',fieldLabel: _('description'),name: 'description',id: 'subscrauthor-'+this.ident+'-description',height: 150,anchor: '99%'}
 		]
 		,keys: [{key: Ext.EventObject.ENTER,shift: true,fn: function() {this.submit() },scope: this}]
 	});
-	subscrAuthor.window.UpdateUser.superclass.constructor.call(this,config);
+	subscrAuthor.window.UpdateItem.superclass.constructor.call(this,config);
 };
-Ext.extend(subscrAuthor.window.UpdateUser,MODx.Window);
-Ext.reg('subscrauthor-window-user-update',subscrAuthor.window.UpdateUser);
+Ext.extend(subscrAuthor.window.UpdateItem,MODx.Window);
+Ext.reg('subscrauthor-window-user-update',subscrAuthor.window.UpdateItem);
