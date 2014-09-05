@@ -3,7 +3,7 @@ $e = $modx->Event;
 $docid = $e->params['id'];
 
 $subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption('subscrauthor_core_path',null,$modx->getOption('core_path').'components/subscrauthor/').'model/subscrauthor/');
-$templateId = $this->modx->getOption('subscrauthor_templateId', $config);
+$templateId = $modx->getOption('subscrauthor_templateId', $config);
 
 $d = $modx->newQuery('subscrAuthorDoc');
 $tempDocs = $modx->getCollection('subscrAuthorDoc',$d);
