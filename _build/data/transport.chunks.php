@@ -4,7 +4,7 @@ $chunks = array();
 
 $tmp = array(
 	'subscAuthor' => array(
-		'file' => 'subscAuthor',
+		'file' => 'subscrAuthor',
 		'description' => '',
 	),
 	'subscr_confirm' => array(
