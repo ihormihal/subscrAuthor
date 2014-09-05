@@ -5,23 +5,19 @@ $snippets = array();
 $tmp = array(
 	'subscrAuthor' => array(
 		'file' => 'subscrAuthor',
-		'description' => '',
-	),
-	'getSubscribers' => array(
-		'file' => 'getSubscribers',
-		'description' => '',
-	),
+		'description' => 'Отправляет подтверждение на подписку',
+	), 
 	'subscrNotify' => array(
 		'file' => 'subscrNotify',
-		'description' => '',
+		'description' => 'Делает основную рассылку',
 	),
 	'subscrConfirm' => array(
 		'file' => 'subscrConfirm',
-		'description' => '',
+		'description' => 'Записывает E-mail подписчика в базу',
 	),
 	'unsubscrAuthor' => array(
 		'file' => 'unsubscrAuthor',
-		'description' => '',
+		'description' => 'Удаляет e-mail подписчика из базы',
 	),
 );
 

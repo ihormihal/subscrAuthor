@@ -2,21 +2,20 @@
 $subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption('subscrauthor_core_path',null,$modx->getOption('core_path').'components/subscrauthor/').'model/subscrauthor/');
 
 /* base config */
-$tpl = $modx->getOption('tpl',$scriptProperties,'subscr_on_author_notify');
-
 $mail_from = $this->modx->getOption('mail_from', $config);
 $mail_from_name = $this->modx->getOption('mail_from_name', $config);
 $mail_subject_conform = $this->modx->getOption('mail_subject_confirm', $config);
 $mail_subject = $this->modx->getOption('mail_subject', $config);
-$unsubscrId = $this->modx->getOption('unsubscrId', $config);
+$unsubscr = $this->modx->getOption('unsubscr', $config);
+$tpl = $this->modx->getOption('mailtpl', $config);
 
-$doc_author = $scriptProperties['author'];
-$docid = $scriptProperties['id'];
-$doc_pagetitle = $scriptProperties['pagetitle'];
+$doc_author = $modx->getOption('author',$scriptProperties,'author');
+$docid = $modx->getOption('id',$scriptProperties,'1');
+$doc_pagetitle = $modx->getOption('pagetitle',$scriptProperties,'pagetitle');
 
 /* base functions */
 
-$unsubscr_doc_url = $modx->makeUrl($unsubscrId);
+$unsubscr_doc_url = $modx->makeUrl($unsubscr);
 
 $modx->setPlaceholder('author',$doc_author);
 $modx->setPlaceholder('pagetitle',$doc_pagetitle);
@@ -38,7 +37,6 @@ foreach ($subscribers as $email) {
     $modx->setPlaceholder('unsubscr_url',$unsubscr_url);
 
     $message = $modx->getChunk($tpl);
-    //$message = $s_active;
 
     $modx->getService('mail', 'mail.modPHPMailer');
     $modx->mail->set(modMail::MAIL_BODY,$message);

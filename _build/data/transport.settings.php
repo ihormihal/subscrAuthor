@@ -28,19 +28,19 @@ $tmp = array(
 		'value' => 'Подтверждение подписки на автора!',
 		'area' => 'subscrauthor_main',
 	),
-	'unsubscrId' => array(
+	'templateId' => array(
+		'xtype' => 'textfield',
+		'value' => '3',
+		'area' => 'subscrauthor_main',
+	),
+	'unsubscr' => array(
 		'xtype' => 'textfield',
 		'value' => '170',
 		'area' => 'subscrauthor_main',
 	),
-	'confirmId' => array(
+	'mailtpl' => array(
 		'xtype' => 'textfield',
-		'value' => '171',
-		'area' => 'subscrauthor_main',
-	),
-	'templateId' => array(
-		'xtype' => 'textfield',
-		'value' => '3',
+		'value' => 'subscrAuthorNotify',
 		'area' => 'subscrauthor_main',
 	),
 );

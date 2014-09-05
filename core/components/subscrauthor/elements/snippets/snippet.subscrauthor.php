@@ -1,22 +1,21 @@
 <?php
 $subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption('subscrauthor_core_path',null,$modx->getOption('core_path').'components/subscrauthor/').'model/subscrauthor/');
-$confirmId = $templateId = $this->modx->getOption('confirmId', $config);
 
 /* base config */
 $tpl = $modx->getOption('tpl',$scriptProperties,'subscr_confirm');
+$confirm = $modx->getOption('confirm',$scriptProperties,'1');
 
 $mail_from = $this->modx->getOption('mail_from', $config);
 $mail_from_name = $this->modx->getOption('mail_from_name', $config);
-$mail_subject_conform = $this->modx->getOption('mail_subject_confirm', $config);
+$mail_subject_confirm = $this->modx->getOption('mail_subject_confirm', $config);
 
 if(isset($_GET['email'])) $user_email = $_GET['email'];
 if(isset($_GET['author'])) $author = $_GET['author'];
 
 $salt = "subscribe_my_email_please";
-$subscr_doc_url = $modx->getOption('site_url').$modx->makeUrl($confirmId);
+$subscr_doc_url = $modx->getOption('site_url').$modx->makeUrl($confirm);
 $subscr_url = $subscr_doc_url.'?email='.$user_email.'&author='.$author.'&hash='.md5($user_email.$salt);
 
-echo $subscr_url;
 
 $modx->setPlaceholder('author',$author);
 $modx->setPlaceholder('subscr_url',$subscr_url);
@@ -27,7 +26,7 @@ $modx->getService('mail', 'mail.modPHPMailer');
 $modx->mail->set(modMail::MAIL_BODY,$message);
 $modx->mail->set(modMail::MAIL_FROM,$mail_from);
 $modx->mail->set(modMail::MAIL_FROM_NAME,$mail_from_name);
-$modx->mail->set(modMail::MAIL_SUBJECT,$mail_subject);
+$modx->mail->set(modMail::MAIL_SUBJECT,$mail_subject_confirm);
 $modx->mail->address('to',$user_email);
 
 

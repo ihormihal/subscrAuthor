@@ -5,28 +5,29 @@ $plugins = array();
 $tmp = array(
 	'addTempDocs' => array(
 		'file' => 'addTempDocs',
-		'description' => '',
+		'description' => 'Добавляет созданные, еще неопубликованные докумены в очередь',
 		'events' => array(
-			'OnManagerPageInit' => array()
+			'OnDocFormSave' => array()
 		)
 	),
 	'checkDocInTemp' => array(
 		'file' => 'checkDocInTemp',
-		'description' => '',
+		'description' => 'Проверяет, есть ли текущий документ в очереди',
 		'events' => array(
-			'OnManagerPageInit' => array()
+			'OnDocFormSave' => array(),
+			'OnDocPublished' => array()
 		)
 	),
 	'removeTempDocs' => array(
 		'file' => 'removeTempDocs',
-		'description' => '',
+		'description' => 'Удаляет документ с очереди',
 		'events' => array(
-			'OnManagerPageInit' => array()
+			'OnDocFormDelete' => array()
 		)
 	),
 	'subscrauthor' => array(
 		'file' => 'subscrauthor',
-		'description' => '',
+		'description' => 'Load custom css',
 		'events' => array(
 			'OnManagerPageInit' => array()
 		)
