@@ -9,6 +9,7 @@ $_lang['setting_subscrauthor_mail_from'] = 'Исходящий E-mail для р�
 $_lang['setting_subscrauthor_mail_from_name'] = 'Имя отправителя';
 $_lang['setting_subscrauthor_mail_subject'] = 'Тема письма рассылки';
 $_lang['setting_subscrauthor_mail_subject_confirm'] = 'Подтверждение подписки на автора';
+$_lang['setting_subscrauthor_subscr'] = 'ID ресурса генерации уведомления подписки';
 $_lang['setting_subscrauthor_unsubscr'] = 'ID ресурса отмены подписки';
 $_lang['setting_subscrauthor_mailtpl'] = 'TPL шаблона письма рассылки';
 $_lang['setting_subscrauthor_templateId'] = 'ID темплейта новых документов';

@@ -20,3 +20,14 @@ $_lang['subscrauthor_intro_msg'] = 'Manage your subscribers.';
 $_lang['user_id'] = 'Subscriber`s ID (if registered)';
 $_lang['user_email'] = 'Subscriber`s E-mail';
 $_lang['author_id'] = 'Author`s ID';
+
+//Messages
+$_lang['subscrauthor_error_mail_confirm'] = 'Unfortunately, an error occurred! Please, try again.';
+$_lang['subscrauthor_success_mail_confirm'] = 'Confirmation email will be sent to your email!';
+
+$_lang['subscrauthor_error_not_subscr'] = '<h1 style="color: #c00;">Error. You are not subscribed to our newsletter.</h1>';
+$_lang['subscrauthor_error_already_subscr'] = '<h1 style="color: #c00;">You are already subscribed to this author.</h1>';
+$_lang['subscrauthor_success_subscr'] = '<h1 style="color: #0c0;">Subscribed!</h1>';
+
+$_lang['subscrauthor_error_not_unsubscr'] = '<h1 style="color: #c00;">Error. You don`t unsubscribe.</h1>';
+$_lang['subscrauthor_success_unsubscr'] = '<h1 style="color: #0c0;">You have successfully unsubscribed.</h1>';

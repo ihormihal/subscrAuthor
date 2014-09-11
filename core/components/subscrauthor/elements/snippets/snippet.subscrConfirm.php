@@ -1,30 +1,30 @@
 <?php
 $subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption('subscrauthor_core_path',null,$modx->getOption('core_path').'components/subscrauthor/').'model/subscrauthor/');
 
-if($_GET['email']) $user_email = $_GET['email'];
-if($_GET['author']) $author = $_GET['author'];
-if($_GET['hash']) $hash = $_GET['hash'];
-
+if(isset($_GET['email']) && isset($_GET['author']) && isset($_GET['hash'])){
+	$user_email = $_GET['email'];
+	$author = $_GET['author'];
+	$hash = $_GET['hash'];
+}else{
+	header("HTTP/1.x 404 Not Found");
+}
 $salt = "subscribe_my_email_please";
 
-if($hash != md5($user_email.$salt)){
-    return '<h1 style="color: #c00;">Ошибка. Вы не подписаны на рассылку.</h1>';
+if($hash !== md5($user_email.$salt)){
+    return $modx->lexicon('subscrauthor_error_not_subscr');
 }
 
 /* Записываем подписчика в базу */
 $subscriber = $modx->getObject('subscrAuthorUser', array('user_email' => $user_email));
 if($subscriber){
-	echo '<h1 style="color: #c00;">Вы уже подписаны на этого автора.</h1>';
+	echo $modx->lexicon('subscrauthor_error_already_subscr');
 }else{
-	$subscriber = $modx->newObject('subscrAuthorUser',array('user_email' => $user_email));
+	$subscriber = $modx->newObject('subscrAuthorUser',array('user_email' => $user_email, 'author_id' => $author));
 	$user = $modx->getUser();
 	if($user){
-		$subscriber->set('user_id',$user->get('id'))
+		$subscriber->set('user_id',$user->get('id'));
 	}
 	if($subscriber->save()){
-		echo '<h1 style="color: #c00;">Подписка оформлена!</h1>';
+		echo $modx->lexicon('subscrauthor_success_subscr');
 	}
 }
-
-
-

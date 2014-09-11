@@ -8,12 +8,12 @@ $templateId = $modx->getOption('subscrauthor_templateId', $config);
 $d = $modx->newQuery('subscrAuthorDoc');
 $tempDocs = $modx->getCollection('subscrAuthorDoc',$d);
 if(count($tempDocs) > 0){
-	$ready = 1; //документ есть в очереди
+  $ready = 1; //документ есть в очереди
 }
 
 if($modx->event->name == 'OnDocFormSave'){
   if($resource->published == 0){
-	$ready = 0; //документ сохранен как не опубликован
+  $ready = 0; //документ сохранен как не опубликован
   }
 }
 

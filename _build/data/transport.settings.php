@@ -33,6 +33,11 @@ $tmp = array(
 		'value' => '3',
 		'area' => 'subscrauthor_main',
 	),
+	'subscr' => array(
+		'xtype' => 'textfield',
+		'value' => '169',
+		'area' => 'subscrauthor_main',
+	),
 	'unsubscr' => array(
 		'xtype' => 'textfield',
 		'value' => '170',
@@ -40,7 +45,7 @@ $tmp = array(
 	),
 	'mailtpl' => array(
 		'xtype' => 'textfield',
-		'value' => 'subscrAuthorNotify',
+		'value' => 'tpl.subscrNotify',
 		'area' => 'subscrauthor_main',
 	),
 );

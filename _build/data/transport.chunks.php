@@ -3,18 +3,22 @@
 $chunks = array();
 
 $tmp = array(
-	'subscAuthor' => array(
+	'tpl.subscrAuthor' => array(
 		'file' => 'subscrAuthor',
-		'description' => '',
+		'description' => 'Чанк выводит кнопку на подписку',
 	),
-	'subscr_confirm' => array(
-		'file' => 'subscr_confirm',
-		'description' => '',
+	'tpl.subscrAuthorAlertify' => array(
+		'file' => 'subscrAuthorAlertify',
+		'description' => 'Чанк выводит кнопку на подписку (JS plugin Alertify)',
 	),
-	'subscr_on_author_notify' => array(
-		'file' => 'subscr_on_author_notify',
-		'description' => '',
+	'tpl.subscrConfirm' => array(
+		'file' => 'subscrConfirm',
+		'description' => 'Шаблон письма уведомления',
 	),
+	'tpl.subscrNotify' => array(
+		'file' => 'subscrNotify',
+		'description' => 'Шаблон письма рассылки',
+	)
 );
 
 // Save chunks for setup options

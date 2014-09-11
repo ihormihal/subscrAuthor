@@ -1,14 +1,19 @@
 <?php
 $subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption('subscrauthor_core_path',null,$modx->getOption('core_path').'components/subscrauthor/').'model/subscrauthor/');
 
-if($_GET['email']) $user_email = $_GET['email'];
-if($_GET['author']) $author = $_GET['author'];
-if($_GET['hash']) $hash = $_GET['hash'];
+if(isset($_GET['email']) && isset($_GET['author']) && isset($_GET['hash'])){
+    $user_email = $_GET['email'];
+    $author = $_GET['author'];
+    $hash = $_GET['hash'];
+}else{
+    return $modx->lexicon('subscrauthor_error_not_unsubscr');
+}
+
 
 $salt = "unsubscribe_my_email_please";
 
 if($hash != md5($user_email.$salt)){
-    return '<h1 style="color: #c00;">Ошибка. Вы не одписались от рассылки.</h1>';
+    return $modx->lexicon('subscrauthor_error_not_unsubscr');
 }else{
     /* Удаляем подписку из базы */
     require_once(MODX_CORE_PATH."components/subscr/config/core.php");
@@ -17,9 +22,9 @@ if($hash != md5($user_email.$salt)){
     $delquery = "DELETE FROM subscribers_authors WHERE author = '$author' AND user_email = '$user_email'";
     $db->run($delquery);
     if($db->result == 1){
-        echo '<h1 style="color: #c00;">Вы успешно отписались от рассылки.</h1>';
+        echo $modx->lexicon('subscrauthor_success_unsubscr');
     }else{
-        echo '<h1 style="color: #c00;">Ошибка. Вы не отписались от рассылки.</h1>';
+        echo $modx->lexicon('subscrauthor_error_not_unsubscr');
     }
     $db->stop();
 }

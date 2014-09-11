@@ -2,12 +2,12 @@
 $subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption('subscrauthor_core_path',null,$modx->getOption('core_path').'components/subscrauthor/').'model/subscrauthor/');
 
 /* base config */
-$mail_from = $this->modx->getOption('mail_from', $config);
-$mail_from_name = $this->modx->getOption('mail_from_name', $config);
-$mail_subject_conform = $this->modx->getOption('mail_subject_confirm', $config);
-$mail_subject = $this->modx->getOption('mail_subject', $config);
-$unsubscr = $this->modx->getOption('unsubscr', $config);
-$tpl = $this->modx->getOption('mailtpl', $config);
+$mail_from = $modx->getOption('subscrauthor_mail_from', $config);
+$mail_from_name = $modx->getOption('subscrauthor_mail_from_name', $config);
+$mail_subject_conform = $modx->getOption('subscrauthor_mail_subject_confirm', $config);
+$mail_subject = $modx->getOption('subscrauthor_mail_subject', $config);
+$unsubscr = $modx->getOption('subscrauthor_unsubscr', $config);
+$tpl = $modx->getOption('subscrauthor_mailtpl', $config);
 
 $doc_author = $modx->getOption('author',$scriptProperties,'author');
 $docid = $modx->getOption('id',$scriptProperties,'1');
