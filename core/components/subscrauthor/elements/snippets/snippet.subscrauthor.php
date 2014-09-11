@@ -10,8 +10,10 @@ $mail_from = $modx->getOption('subscrauthor_mail_from', $config);
 $mail_from_name = $modx->getOption('subscrauthor_mail_from_name', $config);
 $mail_subject_confirm = $modx->getOption('subscrauthor_mail_subject_confirm', $config);
 
-if(isset($_GET['email'])) $user_email = $_GET['email'];
-if(isset($_GET['author'])) $author = $_GET['author'];
+if(isset($_GET['email']) && isset($_GET['author'])){
+	$user_email = $_GET['email'];
+	$author = $_GET['author'];
+}
 
 $salt = "subscribe_my_email_please";
 $subscr_doc_url = $modx->getOption('site_url').$modx->makeUrl($confirm);

@@ -14,10 +14,12 @@ class subscrAuthorUserCreateProcessor extends modObjectCreateProcessor {
 	 */
 	public function beforeSet() {
 		$alreadyExists = $this->modx->getObject('subscrAuthorUser', array(
-			'name' => $this->getProperty('name'),
+			'user_id' => $this->getProperty('user_id'),
+			'user_email' => $this->getProperty('user_email'),
+			'author_id' => $this->getProperty('author_id')
 		));
 		if ($alreadyExists) {
-			$this->modx->error->addField('name', $this->modx->lexicon('subscrauthor_user_err_ae'));
+			$this->modx->error->addField('user_email', $this->modx->lexicon('subscrauthor_user_err_ae'));
 		}
 
 		return !$this->hasErrors();

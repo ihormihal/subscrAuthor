@@ -4,7 +4,7 @@ $subscrAuthor = $modx->getService('subscrauthor','subscrAuthor',$modx->getOption
 /* base config */
 $mail_from = $modx->getOption('subscrauthor_mail_from', $config);
 $mail_from_name = $modx->getOption('subscrauthor_mail_from_name', $config);
-$mail_subject_conform = $modx->getOption('subscrauthor_mail_subject_confirm', $config);
+
 $mail_subject = $modx->getOption('subscrauthor_mail_subject', $config);
 $unsubscr = $modx->getOption('subscrauthor_unsubscr', $config);
 $tpl = $modx->getOption('subscrauthor_mailtpl', $config);
@@ -13,13 +13,12 @@ $doc_author = $modx->getOption('author',$scriptProperties,'author');
 $docid = $modx->getOption('id',$scriptProperties,'1');
 $doc_pagetitle = $modx->getOption('pagetitle',$scriptProperties,'pagetitle');
 
+$author_name = $modx->getObject('modUser', $doc_author )->getOne('Profile')->get('fullname');
+
 /* base functions */
 
 $unsubscr_doc_url = $modx->makeUrl($unsubscr);
 
-$modx->setPlaceholder('author',$doc_author);
-$modx->setPlaceholder('pagetitle',$doc_pagetitle);
-$modx->setPlaceholder('url',$doc_url);
 
 $salt = "unsubscribe_my_email_please";
 
@@ -27,14 +26,22 @@ $doc_url = $modx->getOption('site_url').'?id='.$docid;
 
 /* Получаем подписчиков из базы */
 $c = $modx->newQuery('subscrAuthorUser');
+$query->where(array(
+   'author_id' => $doc_author,
+));
 $subscribers = $modx->getCollection('subscrAuthorUser',$c);
 
 /* Делаем рассылку */
-
-foreach ($subscribers as $email) {
+foreach ($subscribers as $subscriber) {
     $user_email = $subscriber->user_email;
     $unsubscr_url = $unsubscr_doc_url.'?author='.$doc_author.'&email='.$user_email.'&hash='.md5($user_email.$salt);
-    $modx->setPlaceholder('unsubscr_url',$unsubscr_url);
+
+    $modx->setPlaceholders(array(
+       'author' => $author_name,
+       'pagetitle' => $doc_pagetitle,
+       'url' => $doc_url,
+       'unsubscr_url' => $unsubscr_url,
+    ),'');
 
     $message = $modx->getChunk($tpl);
 

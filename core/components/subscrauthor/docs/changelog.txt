@@ -1,5 +1,5 @@
 Changelog for subscrAuthor.
 
-subscrAuthor 0.0.1
+subscrAuthor 1.0.0
 ==============
-- Initial release.
+Second release.
