@@ -16,14 +16,14 @@ if($modx->event->name == 'OnDocFormSave'){
   $ready = 0; //документ сохранен как не опубликован
   }
 }
-
-if (($resource->template == $templateId)  && ($ready == 1)) {
+//$modx->log(modX::LOG_LEVEL_ERROR,'Return='.$ready);
+if ($resource->template == $templateId  && ($ready == 1)) {
     //если темплейт совпадает и в очереди
     $doc_author = $resource->createdby;
     $author = $resource->getTVValue('author');
     //если ТВ заполнено
     if($author != ''){
-       $doc_author = $author; 
+      $doc_author = $author; 
     }
     //ЗАПУСКАЕМ РАССЫЛКУ
     $modx->runSnippet( 

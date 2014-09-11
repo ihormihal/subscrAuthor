@@ -55,7 +55,9 @@ foreach ($subscribers as $email) {
 }
 //Удаляем документ из очереди
 $doc = $modx->getObject('subscrAuthorDoc', array('doc_id' => $docid));
- 
-if ($doc->remove() == false) {
-    $modx->log(modX::LOG_LEVEL_ERROR,'An error occurred while trying to delete docid='.$docid.' from queue to publish');
+
+if($doc !== null){ 
+    if ($doc->remove() == false) {
+        $modx->log(modX::LOG_LEVEL_ERROR,'An error occurred while trying to delete docid='.$docid.' from queue to publish');
+    }
 }
