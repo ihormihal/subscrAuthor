@@ -17,7 +17,7 @@ $author_name = $modx->getObject('modUser', $doc_author )->getOne('Profile')->get
 
 /* base functions */
 
-$unsubscr_doc_url = $modx->makeUrl($unsubscr);
+$unsubscr_doc_url = $modx->makeUrl($unsubscr,'','','full');
 
 
 $salt = "unsubscribe_my_email_please";

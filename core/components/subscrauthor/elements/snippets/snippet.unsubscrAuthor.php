@@ -16,15 +16,13 @@ if($hash != md5($user_email.$salt)){
     return $modx->lexicon('subscrauthor_error_not_unsubscr');
 }else{
     /* Удаляем подписку из базы */
-    require_once(MODX_CORE_PATH."components/subscr/config/core.php");
-    $db = new MyDB();
-    $db->connect();
-    $delquery = "DELETE FROM subscribers_authors WHERE author = '$author' AND user_email = '$user_email'";
-    $db->run($delquery);
-    if($db->result == 1){
-        echo $modx->lexicon('subscrauthor_success_unsubscr');
+    $subscriber = $modx->getObject('subscrAuthorUser',array('user_email' => $user_email, 'author_id' => $author));
+    if($subscriber !== null){
+        if ($subscriber->remove() == false) {
+            return $modx->lexicon('subscrauthor_error_not_unsubscr');
+        }
+        return $modx->lexicon('subscrauthor_success_unsubscr');
     }else{
-        echo $modx->lexicon('subscrauthor_error_not_unsubscr');
+        $modx->log(modX::LOG_LEVEL_ERROR,'An error occurred while trying to find subscriber');
     }
-    $db->stop();
 }
