@@ -16,7 +16,8 @@ if($hash != md5($user_email.$salt)){
     return $modx->lexicon('subscrauthor_error_not_unsubscr');
 }else{
     /* Удаляем подписку из базы */
-    $subscriber = $modx->getObject('subscrAuthorUser',array('user_email' => $user_email, 'author_id' => $author));
+    /* Удаляем подписку из базы */
+    $subscriber = $modx->getObject('subscrAuthorUser', array('user_email' => $user_email, 'author_id' => $author));
     if($subscriber !== null){
         if ($subscriber->remove() == false) {
             return $modx->lexicon('subscrauthor_error_not_unsubscr');
