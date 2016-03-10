@@ -36,7 +36,10 @@ if ($query->prepare() && $query->stmt->execute()) {
 
         $unsubscr_url = $unsubscr_doc_url.'?author='.$doc_author.'&email='.$user_email.'&hash='.md5($user_email.$salt);
         $modx->setPlaceholder('unsubscr_url',$unsubscr_url);
-
+        $modx->setPlaceholder('author',$author_name);
+        $modx->setPlaceholder('pagetitle',$doc_pagetitle);
+        $modx->setPlaceholder('url',$doc_url);
+        
         $message = $modx->getChunk($tpl);
 
         $modx->getService('mail', 'mail.modPHPMailer');
